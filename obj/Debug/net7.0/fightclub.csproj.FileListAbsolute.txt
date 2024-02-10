@@ -31,3 +31,5 @@ C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\refint\fight
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.pdb
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.genruntimeconfig.cache
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\ref\fightclub.dll
+C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
