@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
+using fightclub.DTO.Character;
 using fightclub.Models;
 
 namespace fightclub.Services.CharacterService
@@ -16,24 +17,30 @@ namespace fightclub.Services.CharacterService
                 Name = "player2"
             }
         };
-        public async Task<List<Character>> AddCharacter(Character newCharacter)
+        public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
         {
             characters.Add(newCharacter);
-            return characters;
+            var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
+            serviceResponse.Data = characters;
+            return serviceResponse;
         }
 
-        public async Task<List<Character>> GetAllCharacters()
+        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
         {
-            return characters;
+            var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
+            serviceResponse.Data = characters;
+            return serviceResponse;
         }
 
-        public async Task<Character> GetCharacterById(int id)
+        public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
         {
             var character = characters.FirstOrDefault(c => c.Id == id);
 
             if (character is not null)
             {
-                return character;
+                var serviceResponse = new ServiceResponse<GetCharacterDTO>();
+                serviceResponse.Data = character;
+                return serviceResponse;
             }
             throw new Exception($"Character id:{id} not found");
         }
