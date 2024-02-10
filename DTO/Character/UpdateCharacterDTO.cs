@@ -6,8 +6,9 @@ using fightclub.Models;
 
 namespace fightclub.DTO.Character
 {
-    public class AddCharacterDTO
+    public class UpdateCharacterDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; } = "Player 1";
         public int HitPoints { get; set; } = 100;
         public int Strength { get; set; } = 10;
