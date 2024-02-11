@@ -26,12 +26,14 @@ namespace fightclub.Services.CharacterService
 
         public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
         {
-            var characters = await _context.Characters.ToListAsync();
-            characters.Add(_mapper.Map<Character>(newCharacter));
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-            serviceResponse.Data = characters.Select(c =>
+
+            _context.Characters.Add(_mapper.Map<Character>(newCharacter));
+            await _context.SaveChangesAsync();
+
+            serviceResponse.Data = await _context.Characters.Select(c =>
             _mapper.Map<GetCharacterDTO>(c)
-            ).ToList();
+            ).ToListAsync();
 
             return serviceResponse;
         }
@@ -49,8 +51,8 @@ namespace fightclub.Services.CharacterService
 
         public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
         {
-            var characters = await _context.Characters.ToListAsync();
-            var character = characters.FirstOrDefault(c => c.Id == id);
+
+            var character = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
 
             if (character is not null)
             {
@@ -63,11 +65,12 @@ namespace fightclub.Services.CharacterService
 
         public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updateCharacter)
         {
-            var characters = await _context.Characters.ToListAsync();
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             try
             {
-                var character = characters.FirstOrDefault(c => c.Id == updateCharacter.Id);
+                var character = await _context
+                                        .Characters
+                                            .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id);
                 if (character is null)
                 {
                     throw new Exception($"Character do not exist id: ${updateCharacter.Id}");
@@ -79,6 +82,8 @@ namespace fightclub.Services.CharacterService
                 character.Defense = updateCharacter.Defense;
                 character.Intelligence = updateCharacter.Intelligence;
                 character.Class = updateCharacter.Class;
+
+                await _context.SaveChangesAsync();
                 serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
                 return serviceResponse;
 
@@ -96,16 +101,22 @@ namespace fightclub.Services.CharacterService
         public async Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-            var characters = await _context.Characters.ToListAsync();
             try
             {
-                var character = characters.First(c => c.Id == id);
+                var character = await _context
+                                        .Characters
+                                        .FirstAsync(c => c.Id == id);
+
                 if (character is null)
                 {
                     throw new Exception($"Character with id:{id} not found");
                 }
-                characters.Remove(character);
-                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+                _context.Characters.Remove(character);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = await _context.Characters.Select(c =>
+                                                                    _mapper.Map<GetCharacterDTO>(c))
+                                                                    .ToListAsync();
+
                 return serviceResponse;
             }
             catch (System.Exception ex)
