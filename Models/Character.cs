@@ -14,6 +14,7 @@ namespace fightclub.Models
         public int Defense { get; set; } = 10;
         public int Intelligence { get; set; } = 10;
 
+        public User? User { get; set; }
         public FighterClass Class { get; set; } = FighterClass.Knight;
     }
 }
