@@ -8,3 +8,5 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=^Mgjrt2#1s$!a" -e "MSSQL_PID
 dotnet ef -h
 dotnet ef migrations add initialmigration
 dotnet ef database update
+dotnet tool update -g dotnet-ef
+
