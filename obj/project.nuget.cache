@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BtCFQ8u6Oa6dRRFrYJpSgut54R+4MqSdIhIU+QELuNBCwIVzDKvf5YDuhxpf/fY9NSzE6ojonyMFRNdJNOyILw==",
+  "dgSpecHash": "do+IZhUh3qMN6ovNk33RAuwdMQAYycc2MDMCUL2WqoR/k59B0aYo4lOIfIBVzw7fYxP+xaaS4IZDnXyk/Nji9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mvela\\Desktop\\WebProject\\dotNet\\fightclub\\fightclub.csproj",
+  "projectFilePath": "C:\\Users\\mvela\\OneDrive\\Desktop\\Projects\\dotnet\\fightclub\\fightclub.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mvela\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -78,7 +78,11 @@
     "C:\\Users\\mvela\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\mvela\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+    "C:\\Users\\mvela\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.15\\microsoft.netcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.15\\microsoft.windowsdesktop.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.15\\microsoft.aspnetcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.15\\microsoft.netcore.app.host.win-x64.7.0.15.nupkg.sha512"
   ],
   "logs": []
 }

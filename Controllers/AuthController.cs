@@ -22,7 +22,6 @@ namespace fightclub.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegisterDTO register)
         {
-
             var response = await _auth.Register(
                  new User
                  {
@@ -37,6 +36,20 @@ namespace fightclub.Controllers
             }
             return response;
         }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginDTO user)
+        {
+            var response = await _auth.Login(user.Username, user.Password);
+
+            if (response.Success is false)
+            {
+                return BadRequest(response);
+            }
+            return response;
+
+        }
+
 
     }
 }
