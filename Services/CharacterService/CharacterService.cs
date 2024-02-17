@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using fightclub.Data;
@@ -17,8 +18,10 @@ namespace fightclub.Services.CharacterService
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-        public CharacterService(IMapper mapper, DataContext context)
+        private readonly IHttpContextAccessor _httpContext;
+        public CharacterService(IMapper mapper, DataContext context, IHttpContextAccessor httpContext)
         {
+            _httpContext = httpContext;
             _context = context;
             _mapper = mapper;
         }
@@ -31,17 +34,19 @@ namespace fightclub.Services.CharacterService
             _context.Characters.Add(_mapper.Map<Character>(newCharacter));
             await _context.SaveChangesAsync();
 
-            serviceResponse.Data = await _context.Characters.Select(c =>
-            _mapper.Map<GetCharacterDTO>(c)
-            ).ToListAsync();
+            serviceResponse.Data = await _context
+                                    .Characters.Where(c => c.User.Id == GetUserId())
+                                    .Select(c =>
+                                    _mapper.Map<GetCharacterDTO>(c)
+                                    ).ToListAsync();
 
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters(int userID)
+        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-            var characters = await _context.Characters.Where(c => c.User!.Id == userID).ToListAsync();
+            var characters = await _context.Characters.Where(c => c.User!.Id == GetUserId()).ToListAsync();
             serviceResponse.Data = characters.Select(c =>
             _mapper.Map<GetCharacterDTO>(c)
             ).ToList();
@@ -51,7 +56,8 @@ namespace fightclub.Services.CharacterService
         public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
         {
 
-            var character = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+            var character = await _context.Characters
+                            .FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
 
             if (character is not null)
             {
@@ -69,7 +75,7 @@ namespace fightclub.Services.CharacterService
             {
                 var character = await _context
                                         .Characters
-                                            .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id);
+                                        .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id && c.User.Id == GetUserId());
                 if (character is null)
                 {
                     throw new Exception($"Character do not exist id: ${updateCharacter.Id}");
@@ -104,7 +110,7 @@ namespace fightclub.Services.CharacterService
             {
                 var character = await _context
                                         .Characters
-                                        .FirstAsync(c => c.Id == id);
+                                        .FirstAsync(c => c.Id == id && c.User.Id == GetUserId());
 
                 if (character is null)
                 {
@@ -125,6 +131,11 @@ namespace fightclub.Services.CharacterService
                 return serviceResponse;
             }
 
+        }
+
+        private int GetUserId()
+        {
+            return int.Parse(_httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         }
     }
 }

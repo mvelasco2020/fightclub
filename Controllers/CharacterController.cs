@@ -27,10 +27,8 @@ namespace fightclub.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> Get()
         {
-            // get userid
-            int userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
 
-            return await _characterService.GetAllCharacters(userId);
+            return await _characterService.GetAllCharacters();
         }
 
         [HttpGet("{id}")]
