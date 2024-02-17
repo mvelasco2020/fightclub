@@ -94,41 +94,31 @@ namespace fightclub.Services.CharacterService
             await _context.SaveChangesAsync();
             serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
             return serviceResponse;
-
-
-
-
-
-
         }
 
         public async Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-            try
+
+            var character = await _context
+                                    .Characters
+                                    .FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
+
+            if (character is null)
             {
-                var character = await _context
-                                        .Characters
-                                        .FirstAsync(c => c.Id == id && c.User.Id == GetUserId());
 
-                if (character is null)
-                {
-                    throw new Exception($"Character with id:{id} not found");
-                }
-                _context.Characters.Remove(character);
-                await _context.SaveChangesAsync();
-
-                var characters = await _context.Characters.Where(c => c.User.Id == GetUserId()).ToListAsync();
-                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
-
-                return serviceResponse;
-            }
-            catch (System.Exception ex)
-            {
                 serviceResponse.Success = false;
-                serviceResponse.Message = ex.Message;
+                serviceResponse.Message = "Character not found";
                 return serviceResponse;
             }
+            _context.Characters.Remove(character);
+            await _context.SaveChangesAsync();
+
+            var characters = await _context.Characters.Where(c => c.User.Id == GetUserId()).ToListAsync();
+            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+
+            return serviceResponse;
+
 
         }
 
