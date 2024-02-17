@@ -155,3 +155,4 @@ C:\Users\mvela\OneDrive\Desktop\Projects\dotnet\fightclub\obj\Debug\net7.0\refin
 C:\Users\mvela\OneDrive\Desktop\Projects\dotnet\fightclub\obj\Debug\net7.0\fightclub.pdb
 C:\Users\mvela\OneDrive\Desktop\Projects\dotnet\fightclub\obj\Debug\net7.0\fightclub.genruntimeconfig.cache
 C:\Users\mvela\OneDrive\Desktop\Projects\dotnet\fightclub\obj\Debug\net7.0\ref\fightclub.dll
+C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

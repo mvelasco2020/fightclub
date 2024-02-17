@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using fightclub.DTO.Character;
 using fightclub.Models;
 using fightclub.Services.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fightclub.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CharacterController : ControllerBase
