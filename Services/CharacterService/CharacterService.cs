@@ -31,7 +31,9 @@ namespace fightclub.Services.CharacterService
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
 
-            _context.Characters.Add(_mapper.Map<Character>(newCharacter));
+            Character character = _mapper.Map<Character>(newCharacter);
+            character.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
+            _context.Characters.Add(character);
             await _context.SaveChangesAsync();
 
             serviceResponse.Data = await _context
@@ -59,46 +61,43 @@ namespace fightclub.Services.CharacterService
             var character = await _context.Characters
                             .FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
 
+            var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             if (character is not null)
             {
-                var serviceResponse = new ServiceResponse<GetCharacterDTO>();
                 serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
-                return serviceResponse;
             }
-            throw new Exception($"Character id:{id} not found");
+            return serviceResponse;
+
         }
 
         public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updateCharacter)
         {
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
-            try
-            {
-                var character = await _context
-                                        .Characters
-                                        .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id && c.User.Id == GetUserId());
-                if (character is null)
-                {
-                    throw new Exception($"Character do not exist id: ${updateCharacter.Id}");
-                }
 
-                character.Name = updateCharacter.Name;
-                character.HitPoints = updateCharacter.HitPoints;
-                character.Strength = updateCharacter.Strength;
-                character.Defense = updateCharacter.Defense;
-                character.Intelligence = updateCharacter.Intelligence;
-                character.Class = updateCharacter.Class;
-
-                await _context.SaveChangesAsync();
-                serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
-                return serviceResponse;
-
-            }
-            catch (Exception ex)
+            var character = await _context
+                                    .Characters
+                                    .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id && c.User.Id == GetUserId());
+            if (character is null)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = ex.Message;
-                return (serviceResponse);
+                serviceResponse.Message = "Character not found";
+                return serviceResponse;
             }
+
+            character.Name = updateCharacter.Name;
+            character.HitPoints = updateCharacter.HitPoints;
+            character.Strength = updateCharacter.Strength;
+            character.Defense = updateCharacter.Defense;
+            character.Intelligence = updateCharacter.Intelligence;
+            character.Class = updateCharacter.Class;
+
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+            return serviceResponse;
+
+
+
+
 
 
         }
@@ -118,9 +117,9 @@ namespace fightclub.Services.CharacterService
                 }
                 _context.Characters.Remove(character);
                 await _context.SaveChangesAsync();
-                serviceResponse.Data = await _context.Characters.Select(c =>
-                                                                    _mapper.Map<GetCharacterDTO>(c))
-                                                                    .ToListAsync();
+
+                var characters = await _context.Characters.Where(c => c.User.Id == GetUserId()).ToListAsync();
+                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
 
                 return serviceResponse;
             }
