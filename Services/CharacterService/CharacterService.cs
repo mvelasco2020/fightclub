@@ -38,11 +38,10 @@ namespace fightclub.Services.CharacterService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
+        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters(int userID)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-
-            var characters = await _context.Characters.ToListAsync();
+            var characters = await _context.Characters.Where(c => c.User!.Id == userID).ToListAsync();
             serviceResponse.Data = characters.Select(c =>
             _mapper.Map<GetCharacterDTO>(c)
             ).ToList();

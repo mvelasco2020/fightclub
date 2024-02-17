@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using fightclub.DTO.Character;
 using fightclub.Models;
@@ -26,7 +27,10 @@ namespace fightclub.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> Get()
         {
-            return await _characterService.GetAllCharacters();
+            // get userid
+            int userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+
+            return await _characterService.GetAllCharacters(userId);
         }
 
         [HttpGet("{id}")]
