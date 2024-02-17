@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using fightclub.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 
 namespace fightclub.Data
@@ -78,7 +81,6 @@ namespace fightclub.Data
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var hash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -95,12 +97,29 @@ namespace fightclub.Data
             new Claim(ClaimTypes.Name, user.Username)
             };
 
-            var appSettingsToken = _configuration.GetSection("AppSettings.Token").Value;
+            var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
             if (appSettingsToken is null)
             {
-                
+                throw new Exception("AppSettings Token is null");
             }
-            return string.Empty;
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(
+                System.Text.Encoding.UTF8.GetBytes(appSettingsToken)
+                );
+
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }
