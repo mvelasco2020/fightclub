@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using fightclub.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace fightclub.Data
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
-        public AuthRepository(DataContext context)
+        private readonly IConfiguration _configuration;
+
+        public AuthRepository(DataContext context, IConfiguration configuration)
         {
             this._context = context;
-
+            this._configuration = configuration;
         }
 
         public async Task<ServiceResponse<string>> Login(string username, string password)
@@ -25,7 +28,7 @@ namespace fightclub.Data
                 var user = await _context.Users.FirstAsync(u => u.Username.ToLower() == username.ToLower());
                 if (VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 {
-                    response.Data = user.Id.ToString();
+                    response.Data = CreateToken(user);
                     return response;
                 }
 
@@ -83,5 +86,21 @@ namespace fightclub.Data
             }
         }
 
+        private string CreateToken(User user)
+        {
+
+            var claims = new List<Claim>
+            {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Username)
+            };
+
+            var appSettingsToken = _configuration.GetSection("AppSettings.Token").Value;
+            if (appSettingsToken is null)
+            {
+                
+            }
+            return string.Empty;
+        }
     }
 }
