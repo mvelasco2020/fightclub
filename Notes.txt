@@ -10,3 +10,4 @@ dotnet ef migrations add initialmigration
 dotnet ef database update
 dotnet tool update -g dotnet-ef
 
+dotnet remove package swashbuckle.aspnetcore.filter

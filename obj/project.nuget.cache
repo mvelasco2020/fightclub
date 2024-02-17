@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ncGPbP165sC/4I5VFd/XVrIllEL6tjLDPXkv6+xqd4MO2NS3qBvFvDqZHFI0aGbvMJw1X/Id/LCWHO3aajb6uw==",
+  "dgSpecHash": "/C1x+9tU3VPan3JueL878con8k7OlczL/caKXqYSrdvq5UY0AND16sWaIho8Yf1D9yWLvKpPr/ZIh+NSKVu1zw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mvela\\Desktop\\WebProject\\dotNet\\fightclub\\fightclub.csproj",
   "expectedPackageFiles": [
@@ -47,7 +47,10 @@
     "C:\\Users\\mvela\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\scrutor\\3.3.0\\scrutor.3.3.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\swashbuckle.aspnetcore.filters\\8.0.1\\swashbuckle.aspnetcore.filters.8.0.1.nupkg.sha512",
+    "C:\\Users\\mvela\\.nuget\\packages\\swashbuckle.aspnetcore.filters.abstractions\\8.0.1\\swashbuckle.aspnetcore.filters.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\mvela\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
