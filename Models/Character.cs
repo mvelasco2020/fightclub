@@ -16,5 +16,7 @@ namespace fightclub.Models
 
         public User? User { get; set; }
         public FighterClass Class { get; set; } = FighterClass.Knight;
+
+        public Weapon? Weapon { get; set; }
     }
 }

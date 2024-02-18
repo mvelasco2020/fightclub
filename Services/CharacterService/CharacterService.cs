@@ -76,6 +76,7 @@ namespace fightclub.Services.CharacterService
 
             var character = await _context
                                     .Characters
+                                    .Include(c => c.User)
                                     .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id && c.User.Id == GetUserId());
             if (character is null)
             {

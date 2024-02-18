@@ -25,7 +25,6 @@ C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\staticwebass
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\staticwebassets.build.json
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\scopedcss\bundle\fightclub.styles.css
-C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.csproj.CopyComplete
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.dll
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\refint\fightclub.dll
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.pdb
@@ -159,3 +158,5 @@ C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\Microsoft.As
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\Scrutor.dll
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
 C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.sourcelink.json
+C:\Users\mvela\Desktop\WebProject\dotNet\fightclub\obj\Debug\net7.0\fightclub.csproj.Up2Date
