@@ -52,6 +52,7 @@ namespace fightclub.Services.CharacterService
                                     .Characters
                                     .Where(c => c.User!.Id == GetUserId())
                                     .Include(c => c.Weapon)
+                                    .Include(c => c.Skills)
                                     .ToListAsync();
             serviceResponse.Data = characters.Select(c =>
             _mapper.Map<GetCharacterDTO>(c)
@@ -64,8 +65,9 @@ namespace fightclub.Services.CharacterService
 
             var character = await _context
                                     .Characters
-                                    .Include(c => c.Weapon)
                                     .Where(c => c.User.Id == GetUserId())
+                                    .Include(c => c.Weapon)
+                                    .Include(c => c.Skills)
                                     .FirstOrDefaultAsync(c => c.Id == id);
 
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
@@ -117,7 +119,6 @@ namespace fightclub.Services.CharacterService
 
             if (character is null)
             {
-
                 serviceResponse.Success = false;
                 serviceResponse.Message = "Character not found";
                 return serviceResponse;
@@ -132,10 +133,43 @@ namespace fightclub.Services.CharacterService
 
 
         }
+        public async Task<ServiceResponse<GetCharacterDTO>> AddCharacterSkill(AddCharacterSkillDTO newCharacterSill)
+        {
+            var serviceResponse = new ServiceResponse<GetCharacterDTO>();
+            try
+            {
+                var character = await _context
+                                    .Characters
+                                    .Where(c => c.User.Id == GetUserId())
+                                    .Include(c => c.Weapon)
+                                    .Include(c => c.Skills)
+                                    .FirstOrDefaultAsync(c => c.Id == newCharacterSill.CharacterId);
+
+                if (character is null)
+                {
+                    throw new Exception();
+                }
+                var skill = await _context
+                                    .Skills
+                                    .FirstOrDefaultAsync(s => s.Id == newCharacterSill.SkillId);
+
+                character.Skills!.Add(skill);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+            }
+            catch (System.Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "Something wen wrong while adding a skill";
+            }
+            return serviceResponse;
+        }
 
         private int GetUserId()
         {
             return int.Parse(_httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         }
+
+
     }
 }

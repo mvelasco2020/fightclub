@@ -17,6 +17,7 @@ namespace fightclub
             CreateMap<AddCharacterDTO, Character>();
             CreateMap<AddWeaponDTO, Weapon>();
             CreateMap<Weapon, GetWeaponDTO>();
+            CreateMap<Skill, GetSkillDTO>();
         }
     }
 }

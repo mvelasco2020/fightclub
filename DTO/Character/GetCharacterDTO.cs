@@ -18,5 +18,6 @@ namespace fightclub.DTO.Character
         public FighterClass Class { get; set; } = FighterClass.Knight;
 
         public GetWeaponDTO? Weapon { get; set; }
+        public List<GetSkillDTO>? Skills { get; set; }
     }
 }

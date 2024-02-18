@@ -64,6 +64,11 @@ namespace fightclub.Controllers
             return Ok(response);
         }
 
+        [HttpPost("skill")]
+        public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> AddCharacterSkill(AddCharacterSkillDTO newSkill)
+        {
+            return Ok(await _characterService.AddCharacterSkill(newSkill));
+        }
 
     }
 }

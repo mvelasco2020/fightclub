@@ -30,6 +30,8 @@ namespace fightclub.Services.WeaponService
             Character character = await _context.Characters
                                     .Include(c => c.User)
                                     .Where(c => c.User.Id == GetUserId())
+                                    .Include(c => c.Weapon)
+                                    .Include(c => c.Skills)
                                     .FirstOrDefaultAsync(c => c.Id == newWeapon.CharacterId);
 
 
