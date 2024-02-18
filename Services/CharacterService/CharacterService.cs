@@ -48,7 +48,11 @@ namespace fightclub.Services.CharacterService
         public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-            var characters = await _context.Characters.Where(c => c.User!.Id == GetUserId()).ToListAsync();
+            var characters = await _context
+                                    .Characters
+                                    .Where(c => c.User!.Id == GetUserId())
+                                    .Include(c => c.Weapon)
+                                    .ToListAsync();
             serviceResponse.Data = characters.Select(c =>
             _mapper.Map<GetCharacterDTO>(c)
             ).ToList();
@@ -58,8 +62,11 @@ namespace fightclub.Services.CharacterService
         public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
         {
 
-            var character = await _context.Characters
-                            .FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
+            var character = await _context
+                                    .Characters
+                                    .Include(c => c.Weapon)
+                                    .Where(c => c.User.Id == GetUserId())
+                                    .FirstOrDefaultAsync(c => c.Id == id);
 
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             if (character is not null)
@@ -76,8 +83,10 @@ namespace fightclub.Services.CharacterService
 
             var character = await _context
                                     .Characters
+                                    .Where(c => c.User.Id == GetUserId())
                                     .Include(c => c.User)
-                                    .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id && c.User.Id == GetUserId());
+                                    .Include(c => c.Weapon)
+                                    .FirstOrDefaultAsync(c => c.Id == updateCharacter.Id);
             if (character is null)
             {
                 serviceResponse.Success = false;
@@ -103,7 +112,8 @@ namespace fightclub.Services.CharacterService
 
             var character = await _context
                                     .Characters
-                                    .FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
+                                    .Where(c => c.User.Id == GetUserId())
+                                    .FirstOrDefaultAsync(c => c.Id == id);
 
             if (character is null)
             {

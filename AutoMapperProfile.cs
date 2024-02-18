@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using fightclub.DTO.Character;
+using fightclub.DTO.Weapon;
 using fightclub.Models;
 
 namespace fightclub
@@ -14,6 +15,8 @@ namespace fightclub
         {
             CreateMap<Character, GetCharacterDTO>();
             CreateMap<AddCharacterDTO, Character>();
+            CreateMap<AddWeaponDTO, Weapon>();
+            CreateMap<Weapon, GetWeaponDTO>();
         }
     }
 }

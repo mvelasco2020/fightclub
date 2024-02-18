@@ -3,6 +3,7 @@ dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 dotnet add package Microsoft.EntityFrameworkCore --version 7.0.0
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.0
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 7.0.0
+dotnet add package swashbuckle.aspnetcore.filter
 dotnet tool install --global dotnet-ef --version 7.0.0
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=^Mgjrt2#1s$!a" -e "MSSQL_PID=Express" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest 
 dotnet ef -h
@@ -10,4 +11,3 @@ dotnet ef migrations add initialmigration
 dotnet ef database update
 dotnet tool update -g dotnet-ef
 
-dotnet remove package swashbuckle.aspnetcore.filter
