@@ -19,5 +19,9 @@ namespace fightclub.DTO.Character
 
         public GetWeaponDTO? Weapon { get; set; }
         public List<GetSkillDTO>? Skills { get; set; }
+
+        public int Fights { get; set; }
+        public int Wins { get; set; }
+        public int Losses { get; set; }
     }
 }

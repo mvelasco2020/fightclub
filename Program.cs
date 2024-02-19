@@ -1,5 +1,6 @@
 using fightclub.Data;
 using fightclub.Services.CharacterService;
+using fightclub.Services.FightService;
 using fightclub.Services.WeaponService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IWeaponService, WeaponService>();
+builder.Services.AddScoped<IFightService, FightService>();
 // secure web calls and controller classes
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
