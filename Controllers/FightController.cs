@@ -31,5 +31,12 @@ namespace fightclub.Controllers
 
             return Ok(await _fightService.WeaponAttack(request));
         }
+
+        [HttpPost("Skill")]
+        public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> SkillAttack(SkillAtkDTO request)
+        {
+
+            return Ok(await _fightService.SkillAttack(request));
+        }
     }
 }
