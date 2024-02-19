@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using fightclub.DTO.Fight;
+using fightclub.Models;
 using fightclub.Services.FightService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,15 +24,12 @@ namespace fightclub.Controllers
             _fightService = fightService;
         }
 
-        public IActionResult Index()
-        {
-            return Ok();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost("Weapon")]
+        public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> WeaponAttack(WeaponAtkDTO request)
         {
-            return Ok("Error!");
+
+            return Ok(await _fightService.WeaponAttack(request));
         }
     }
 }

@@ -11,3 +11,11 @@ dotnet ef migrations add initialmigration
 dotnet ef database update
 dotnet tool update -g dotnet-ef
 
+# Flow #
+install packages
+setup database
+Models
+ServiceResponse
+Dto
+Controller
+Automapper
