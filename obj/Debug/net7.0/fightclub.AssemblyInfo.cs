@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fightclub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2829f1acb0dad7a7766ac658888d10ecb9b1fef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c53fae18b526404f7097c1220bde3b36c50c7a93")]
 [assembly: System.Reflection.AssemblyProductAttribute("fightclub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fightclub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

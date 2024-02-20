@@ -11,5 +11,6 @@ namespace fightclub.Services.FightService
     {
         Task<ServiceResponse<AttackResultDTO>> WeaponAttack(WeaponAtkDTO request);
         Task<ServiceResponse<AttackResultDTO>> SkillAttack(SkillAtkDTO request);
+        Task<ServiceResponse<FightResultDTO>> Fight(FightRequestDTO request);
     }
 }
