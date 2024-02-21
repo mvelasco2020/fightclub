@@ -23,21 +23,22 @@ namespace fightclub.Controllers
             _fightService = fightService;
         }
 
+        /*
 
-        [HttpPost("Weapon")]
-        public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> WeaponAttack(WeaponAtkDTO request)
-        {
+                [HttpPost("Weapon")]
+                public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> WeaponAttack(WeaponAtkDTO request)
+                {
 
-            return Ok(await _fightService.WeaponAttack(request));
-        }
+                    return Ok(await _fightService.WeaponAttack(request));
+                }
 
-        [HttpPost("Skill")]
-        public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> SkillAttack(SkillAtkDTO request)
-        {
+                [HttpPost("Skill")]
+                public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> SkillAttack(SkillAtkDTO request)
+                {
 
-            return Ok(await _fightService.SkillAttack(request));
-        }
-
+                    return Ok(await _fightService.SkillAttack(request));
+                }
+        */
 
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<FightResultDTO>>> Fight(FightRequestDTO request)
